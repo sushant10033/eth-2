@@ -8,8 +8,8 @@ const hre = require("hardhat");
 
 async function main() {
   const initBalance = 1;
-  const ramanAssessment = await hre.ethers.getContractFactory("ramanAssessment");
-  const assessment = await ramanAssessment.deploy();
+  const susAssessment = await hre.ethers.getContractFactory("susAssessment");
+  const assessment = await susAssessment.deploy();
   await assessment.deployed();
 
   console.log(`A contract with balance of ${initBalance} eth deployed to ${assessment.address}`);
