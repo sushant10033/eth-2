@@ -4,9 +4,8 @@ pragma solidity ^0.8.16;
 contract ramanAssessment {  
     event Deposit(uint256 amount);
     event Withdraw(uint256 amount);
-    event subResult(uint256 result); 
-    event multiplyResult(uint256 result); 
-    event divideResult(uint256 result); 
+    event subResult(uint256 result);  
+    event addResult(uint256 result); 
     event OwnerChanged(address indexed oldOwner, address indexed newOwner);
     event FundsTransferred(address indexed to, uint256 amount);
     
@@ -50,25 +49,24 @@ contract ramanAssessment {
     }
 
     function ownerName() public pure returns(string memory) {
-        return "divneet";
+        return "sushant raj";
     }
 
     function ownerCity() public pure returns(string memory) {
-        return "Chandigarh University";
+        return "CU";
     }
         
     function ownerStatus() public pure returns(string memory) {
-        return "Eligible Owner";
+        return "Orignal Owner";
     }
-
-     function multiply(uint a, uint b) public returns(uint) {
-        uint result = a * b;
-        emit multiplyResult(result);
+    function  add(uint a, uint b) public returns(uint) {
+        uint result = a + b;
+        emit addResult(result);
         return result;
     }
-    function  divide(uint a, uint b) public returns(uint) {
-        uint result = a / b;
-        emit divideResult(result);
+    function  sub(uint a, uint b) public returns(uint) {
+        uint result = a - b;
+        emit subResult(result);
         return result;
     }
 
