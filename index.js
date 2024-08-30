@@ -1,21 +1,20 @@
 import { useState, useEffect } from "react";
 import { ethers } from "ethers";
-import atm_abi from "../artifacts/contracts/ramanAssessment.sol/ramanAssessment.json";
+import atm_abi from "../artifacts/contracts/susAssessment.sol/susAssessment.json";
 
 export default function HomePage() {
   const [ethWallet, setEthWallet] = useState(undefined);
   const [account, setAccount] = useState(undefined);
   const [atm, setATM] = useState(undefined);
   const [balance, setBalance] = useState(undefined);
-  const [ownerName, setOwnerName] = useState("Divneet");
-  const [ownerCity, setOwnerCity] = useState("Chandigarh University");
-  const [ownerStatus, setOwnerStatus] = useState("Eligible Owner");
+  const [ownerName, setOwnerName] = useState("Sushant raj");
+  const [ownerCity, setOwnerCity] = useState("CU");
+  const [ownerStatus, setOwnerStatus] = useState("Orignal Owner");
   const [networkID, setNetworkID] = useState(null); // Initialize networkID state
   const [recipientAddress, setRecipientAddress] = useState("");
   const [transferAmount, setTransferAmount] = useState("");
-  const [Subtract, setsub] = useState("");
-  const [Multiply, setAdd] = useState("");
-  const [Divide, setdiv] = useState("");
+  const [ADD, setadd] = useState("");
+  const [SUB, setsub] = useState("");
   const [inputA, setInputA] = useState("");
   const [inputB, setInputB] = useState("");
 
@@ -106,29 +105,28 @@ export default function HomePage() {
       setOwnerStatus(ownerStatus);
     }
   };
-
-  
-  const multiply = async () => {
-    if (atm) {
-      const a = parseInt(inputA);
-      const b = parseInt(inputB);
-      let tx = await atm.multiply(a, b, { gasLimit: 3000000 });
-      const receipt = await tx.wait();
-      const result = receipt.events.find(event => event.event === "multiplyResult").args.result.toNumber();
-      setAdd(result);
-    }
-  };
-    const divide = async () => {
+    const add = async () => {
       if (atm) {
         const a = parseInt(inputA);
         const b = parseInt(inputB);
-        let tx = await atm.divide(a, b, { gasLimit: 3000000 });
+        let tx = await atm.add(a, b, { gasLimit: 3000000 });
         const receipt = await tx.wait();
-        const result = receipt.events.find(event => event.event === "divideResult").args.result.toNumber();
-        setdiv(result);
+        const result = receipt.events.find(event => event.event === "addResult").args.result.toNumber();
+        setadd(result);
       }
 
   };
+  const sub = async () => {
+    if (atm) {
+      const a = parseInt(inputA);
+      const b = parseInt(inputB);
+      let tx = await atm.sub(a, b, { gasLimit: 3000000 });
+      const receipt = await tx.wait();
+      const result = receipt.events.find(event => event.event === "subResult").args.result.toNumber();
+      setsub(result);
+    }
+
+};
   const checkNetworkId = async () => {
     if (!ethWallet) {
       console.error("Ethereum provider not found.");
@@ -234,9 +232,10 @@ export default function HomePage() {
           >
             Transfer Funds
           </button>
-          <h2>Calculation For Token</h2>
-        <p style={{ fontFamily: "Sans-serif" }}>solution multi: {Multiply}</p>
-        <p style={{ fontFamily: "Sans-serif" }}>solution div:{Divide}</p>
+          <h2>Calculator </h2>
+        
+        <p style={{ fontFamily: "Sans-serif" }}>solution add:{ADD}</p>
+        <p style={{ fontFamily: "Sans-serif" }}>solution sub:{SUB}</p>
         <input
           type="number"
           placeholder="Enter the value of first variable A: "
@@ -250,11 +249,11 @@ export default function HomePage() {
           onChange={handleInputBChange}
         />
 
-        <button style={{ backgroundColor: "yellow" }} onClick= {multiply}>
-        solution multi:
+        <button style={{ backgroundColor: "yellow" }} onClick={sub}>
+        solution sub:
         </button>
-        <button style={{ backgroundColor: "yellow" }} onClick={divide}>
-        solution div:
+        <button style={{ backgroundColor: "yellow" }} onClick={add}>
+        solution add:
         </button>
         </div>
       
@@ -270,7 +269,7 @@ export default function HomePage() {
   return (
     <main className="container">
       <header>
-        <h1>WELCOME TO  ** Chandigarh University Track **</h1>
+        <h1>WELCOME TO  ** SUS Tech$hak **</h1>
         <p>Let's TRANSACT</p>
         <p>MAKE A SELECTION:-</p>
       </header>
@@ -286,7 +285,7 @@ export default function HomePage() {
             font-family: "Times New Roman", serif;
             border: 10px solid black;
             border-radius: 20px;
-            background-image: url("https://i.pinimg.com/originals/6a/66/7f/6a667f769cef106afa00d2c309816a21.jpg");
+            background-image: url("https://i.pinimg.com/736x/5a/5d/f2/5a5df29936975790ec9d5c7dcc27494f.jpg");
             height: 850px;
             width: 1500px;
             opacity: 0.9 ;
